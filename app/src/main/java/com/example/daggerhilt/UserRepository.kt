@@ -5,10 +5,20 @@ import javax.inject.Inject
 import kotlin.math.log
 
 const val TAG = "MyTag"
-class UserRepository @Inject constructor( private val loggerService: LoggerService) {
 
-    fun saveUser(email:String,password:String){
-        loggerService.log("User save in db")
+interface UserRepository {
+    fun saveUser(email: String, password: String)
+}
 
+
+class SQLRepository @Inject constructor() : UserRepository {
+    override fun saveUser(email: String, password: String) {
+        Log.d(TAG, "User saved in DB")
     }
 }
+
+    class FirebaseRepository : UserRepository {
+        override fun saveUser(email: String, password: String) {
+            Log.d(TAG, "User saved in Firebase")
+        }
+    }
