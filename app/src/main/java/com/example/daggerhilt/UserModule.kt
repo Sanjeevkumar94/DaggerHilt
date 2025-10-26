@@ -1,5 +1,6 @@
 package com.example.daggerhilt
 
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,11 +11,21 @@ import javax.inject.Singleton
 
 @InstallIn(FragmentComponent::class)
 @Module
-class UserModule {
+abstract class UserModule {
 
-    @Provides
+  /*  @Provides
     fun ProvidesUserRepositor(): UserRepository {
         return FirebaseRepository()
     }
+*/
 
+
+    /*@Provides
+    fun providesUserSqlRepository(sqlRepository: SQLRepository):UserRepository{
+        return sqlRepository
+    }*/
+
+
+    @Binds
+    abstract fun bindsUserRepo(sqlRepository: SQLRepository):UserRepository
 }
